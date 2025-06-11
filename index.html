@@ -15,14 +15,17 @@
             color: #3D3D3D;
             line-height: 1.6;
         }
-        /* 各セクションを新しいページとして印刷 */
+        /* 各セクションを新しいページとして印刷することを意識した基本スタイル */
         section {
-            page-break-before: always;
-            padding: 3rem 1.5rem; /* 印刷時の余白 */
-            min-height: 90vh; /* 1ページに収まるように調整 */
+            page-break-before: always; /* 各セクションの前で改ページ */
+            padding: 3rem 5rem; /* 画面表示時の横向き感を出すパディング */
+            min-height: 90vh; /* 画面表示時の高さを確保 */
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center; /* 画面表示時も中央寄せ */
+            box-sizing: border-box; /* パディングを幅に含める */
+            text-align: center; /* テキストを中央寄せ */
         }
         section:first-of-type {
             page-break-before: auto; /* 最初のセクションは改ページしない */
@@ -34,6 +37,13 @@
         p, li {
             font-size: 1rem;
             margin-bottom: 0.5rem;
+            text-align: left; /* 箇条書きは左寄せに戻す */
+        }
+        .text-center p {
+             text-align: center; /* センタリングしたいpタグは再指定 */
+        }
+        ul {
+            list-style-position: inside; /* リストマーカーを内側に */
         }
         img {
             max-width: 100%;
@@ -41,39 +51,127 @@
             display: block;
             margin: 1.5rem auto;
         }
-        /* 印刷時に不要な要素を非表示 */
+
+        /* 印刷時のスタイル調整 */
         @media print {
-            header, footer, .nav-link, #mobile-nav, #gemini-feature {
-                display: none !important;
+            @page {
+                size: A4 landscape; /* 用紙サイズをA4横向きに指定 */
+                margin: 1cm; /* 印刷時の余白 */
             }
             body {
                 margin: 0;
                 padding: 0;
+                -webkit-print-color-adjust: exact; /* 背景色や画像を正確に印刷 */
+                color-adjust: exact;
+            }
+            header, footer {
+                display: none !important; /* ヘッダーとフッターを非表示 */
             }
             section {
-                padding: 1cm 1.5cm; /* 印刷時の余白をさらに調整 */
+                page-break-after: always; /* 各セクションの後に改ページを強制 */
+                page-break-before: always;
+                padding: 1.5cm 2cm; /* 印刷時のパディングを調整 */
+                height: 100vh; /* 印刷時にビューポートの高さを利用 */
+                width: 100vw; /* 印刷時にビューポートの幅を利用 */
+                display: block !important; /* Flexboxを解除し、ブロック要素として配置 */
+                text-align: center; /* セクション全体を中央寄せ */
             }
-            .gear-item, .arrow-right, #result-profit, #result-salary {
-                border: 1px solid #e0e0e0; /* 印刷でも要素の区切りがわかるように */
-                padding: 0.5rem;
+            section:first-of-type {
+                page-break-before: auto;
+            }
+            h1, h2, h3, h4, p {
+                text-align: center !important; /* 全てのテキストを中央寄せ */
+            }
+            ul, ol {
+                text-align: left !important; /* リストは左寄せを維持 */
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 600px; /* リストの最大幅 */
+            }
+            img {
+                max-width: 80% !important; /* 印刷時の画像の最大幅 */
+                height: auto !important;
+                margin: 1rem auto !important; /* 印刷時の画像のマージン */
+            }
+
+            /* インタラクティブ要素や不要なUIの非表示 */
+            .nav-link, #mobile-nav, #gemini-feature, .gear-path, .flex-col, .flex-row,
+            .gear-item, .arrow-right, #result-profit, #result-salary, #explanation-box {
+                display: block !important; /* 基本的にブロック要素に戻す */
+                border: none !important; /* 枠線を削除 */
+                padding: 0.5rem 0; /* パディングを調整 */
                 margin-bottom: 0.5rem;
+                box-shadow: none !important; /* 影を削除 */
+                background-color: transparent !important; /* 背景色を透明に */
+                color: #3D3D3D !important; /* テキスト色を標準に */
+                text-align: center !important;
             }
-            .gear-path, .flex-col, .flex-row {
-                display: block !important; /* flex/gridを解除しブロック要素として並べる */
+            .gear-item {
+                font-weight: bold;
+                font-size: 1.1rem;
             }
-            .space-x-4 > div { margin-left: 0 !important; }
-            .space-y-4 > div { margin-top: 0 !important; }
-            /* 印刷時の矢印の表示を最適化 */
-            .print-arrow-down {
-                font-size: 3rem; /* 印刷時でも大きく表示 */
-                line-height: 1;
-                margin: 1rem auto;
-                text-align: center;
+            #explanation-content {
+                display: block !important;
+                background-color: #f8f8f8 !important; /* 説明ボックスの背景色 */
+                border: 1px solid #e0e0e0 !important;
+                padding: 1rem !important;
+                margin-top: 1.5rem !important;
+                text-align: left !important;
             }
-            .print-arrow-inline {
-                font-size: 1.5rem;
-                vertical-align: middle;
-                margin: 0 0.5rem;
+            #explanation-content h4 {
+                text-align: left !important;
+            }
+            #explanation-content ul {
+                text-align: left !important;
+                padding-left: 1.5rem;
+            }
+
+            /* 成果への道筋のレイアウトを調整 */
+            #section-your-role .bg-white.p-6 {
+                display: block !important;
+                padding: 1.5rem !important;
+                max-width: 100%;
+                margin: auto;
+            }
+            #section-your-role .grid {
+                display: block !important;
+                margin-bottom: 1.5rem;
+            }
+            #section-your-role .grid > div {
+                margin-bottom: 1rem;
+                padding: 0;
+            }
+            #section-your-role .grid > div > div {
+                padding: 0.75rem !important;
+            }
+            #section-your-role .text-center.my-8 {
+                margin-top: 2rem !important;
+                margin-bottom: 2rem !important;
+            }
+            #section-your-role .flex-col.md\\:flex-row {
+                display: block !important;
+            }
+            #section-your-role #result-profit,
+            #section-your-role #result-salary {
+                margin-top: 1rem !important;
+                padding: 1rem !important;
+                width: 100% !important;
+                flex: none !important;
+                text-align: center !important;
+                background-color: #f0f8ff !important;
+                border: 1px solid #c0d9ec !important;
+                box-shadow: none !important;
+            }
+            #section-your-role .text-3xl.font-bold.text-gray-300.print-arrow-inline {
+                display: block !important;
+                text-align: center !important;
+                font-size: 2.5rem !important;
+                margin: 1rem 0 !important;
+                color: #A57E58 !important;
+            }
+            /* 成果への道筋の行動項目のパディングを調整 */
+            #section-your-role .bg-gray-100.text-gray-700.p-3 {
+                padding: 0.75rem !important;
             }
         }
     </style>
@@ -81,7 +179,7 @@
 <body class="antialiased">
 
     <main>
-        <section id="section-intro" class="container mx-auto px-6 text-center">
+        <section id="section-intro" class="container mx-auto px-6">
             <h1 class="text-3xl md:text-5xl font-bold mb-4">自己紹介</h1>
             <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
                 私のこれまでの歩みをご紹介します。
@@ -125,7 +223,7 @@
             </div>
         </section>
 
-        <section id="section-industry" class="container mx-auto px-6 text-center">
+        <section id="section-industry" class="container mx-auto px-6">
             <h1 class="text-3xl md:text-5xl font-bold mb-4">美容業界の状況</h1>
             <h2 class="text-lg md:text-xl font-light text-gray-700 mb-8">変化する経営環境と「当たり前」ではない経営努力</h2>
             <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
@@ -220,7 +318,7 @@
             </div>
         </section>
 
-        <section id="section-future" class="container mx-auto px-6 text-center">
+        <section id="section-future" class="container mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold mb-3">共に創る未来</h2>
             <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">会社の成長なくして個人の成長なし、個人の成長なくして会社の成長なし。これは中小企業経営の揺るぎない原則です。</p>
 
