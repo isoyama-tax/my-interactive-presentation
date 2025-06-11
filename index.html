@@ -3,372 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>共に創る未来 | 税理士が見る、ビジネスのリアル</title>
+    <title>印刷用プレゼンテーション資料 | 税理士が見る、ビジネスのリアル</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutral Harmony -->
-    <!-- Application Structure Plan: A single-page, vertical-scrolling narrative application. The structure is thematic, not slide-by-slide, to create a flowing story. It now starts with a personal self-introduction, followed by the broad context (Why is change needed?), moves to the company's specific strategy (How are we changing?), then focuses on the individual's role (What can I do?), and ends with a shared vision (What is our future?). This narrative flow is more engaging and helps employees see the connection from the big picture to their daily work. A fixed top navigation allows non-linear exploration for users who want to jump to specific topics. -->
-    <!-- Visualization & Content Choices:
-        1. Self-Introduction (New Section) -> Goal: Inform/Build Trust -> Viz: Image and structured text (HTML/CSS), image-based X icon -> Interaction: None -> Justification: Establishes credibility and a personal connection at the outset. Uses provided image for icon.
-        2. Industry Situation (Section 1 - previously Economic Trend) -> Goal: Inform -> Viz: Textual analysis and actual market data image -> Interaction: None -> Justification: Provides industry context while highlighting the company's strength within it, aligning with new user request. Uses actual image for data.
-        3. Strategy Shift (Section 2) -> Goal: Compare -> Viz: HTML/CSS side-by-side cards -> Interaction: Click reveals details -> Justification: Clearly contrasts "Quantity vs. Quality," making the strategic choice intuitive and memorable.
-        4. Future Investment (Section 3 - previously Section 4) -> Goal: Inform -> Viz: Icon-based info cards (HTML/CSS) -> Interaction: None -> Justification: Presents key investments (talent, service) in a clean, easily scannable format.
-        5. Action-to-Reward Path (Section 4 - previously Section 3) -> Goal: Relationships -> Viz: Interactive diagram (HTML/CSS/JS) -> Interaction: Clicking an action highlights the causal chain (Action -> Profit -> Salary) and updates a text panel. Improved arrow visualization with descriptive text, changed horizontal arrows to '&', and moved explanation box. -> Justification: This is the core interactive element. It makes the abstract connection between work and pay tangible and explorable, which is highly motivating. Removed "potential" chart as requested.
-        6. Growth Cycle (Section 5 - previously Section 4) -> Goal: Organize/Inform -> Viz: "Growth Spiral" (HTML/CSS) -> Interaction: Subtle scroll-reveal animation -> Justification: Ends the narrative on a positive, symbolic note of shared growth, visually representing the "Win-Win" principle. Removed concluding text and button.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            font-family: 'Noto Sans+Sans+JP', sans-serif;
-            background-color: #FDFBF8;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #FFFFFF; /* 印刷用に背景を白に統一 */
             color: #3D3D3D;
+            line-height: 1.6;
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 40vh;
+        /* 各セクションを新しいページとして印刷 */
+        section {
+            page-break-before: always;
+            padding: 3rem 1.5rem; /* 印刷時の余白 */
+            min-height: 90vh; /* 1ページに収まるように調整 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .nav-link {
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
+        section:first-of-type {
+            page-break-before: auto; /* 最初のセクションは改ページしない */
         }
-        .nav-link:hover, .nav-link.active {
-            color: #A57E58;
-            border-bottom-color: #A57E58;
+        h1, h2, h3, h4 {
+            color: #A57E58; /* メインカラーを保持 */
+            margin-bottom: 1rem;
         }
-        .gear-path > div { transition: all 0.3s ease-in-out; }
-        .gear-item.active {
-            background-color: #A57E58 !important;
-            color: #FFFFFF !important;
-            transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        p, li {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
-        .path-line {
-            transition: all 0.5s ease-in-out;
-            background-color: #D1C4B8;
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5rem auto;
         }
-        .path-line.active {
-            background-color: #A57E58;
-        }
-        .arrow-right {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-left: 8px solid #A57E58;
-            margin-left: 8px;
-            vertical-align: middle;
+        /* 印刷時に不要な要素を非表示 */
+        @media print {
+            header, footer, .nav-link, #mobile-nav, #gemini-feature {
+                display: none !important;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            section {
+                padding: 1cm 1.5cm; /* 印刷時の余白をさらに調整 */
+            }
+            .gear-item, .arrow-right, #result-profit, #result-salary {
+                border: 1px solid #e0e0e0; /* 印刷でも要素の区切りがわかるように */
+                padding: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+            .gear-path, .flex-col, .flex-row {
+                display: block !important; /* flex/gridを解除しブロック要素として並べる */
+            }
+            .space-x-4 > div { margin-left: 0 !important; }
+            .space-y-4 > div { margin-top: 0 !important; }
+            /* 印刷時の矢印の表示を最適化 */
+            .print-arrow-down {
+                font-size: 3rem; /* 印刷時でも大きく表示 */
+                line-height: 1;
+                margin: 1rem auto;
+                text-align: center;
+            }
+            .print-arrow-inline {
+                font-size: 1.5rem;
+                vertical-align: middle;
+                margin: 0 0.5rem;
+            }
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="text-xl font-bold text-gray-800">
-                共に創る未来
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#section-intro" class="nav-link text-gray-600 pb-1">自己紹介</a>
-                <a href="#section-industry" class="nav-link text-gray-600 pb-1">美容業界の状況</a>
-                <a href="#section-company-investment" class="nav-link text-gray-600 pb-1">会社の投資</a>
-                <a href="#section-your-role" class="nav-link text-gray-600 pb-1">あなたの役割</a>
-                <a href="#section-future" class="nav-link text-gray-600 pb-1">共に創る未来</a>
-            </div>
-            <div class="md:hidden">
-                <select id="mobile-nav" class="block w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="#section-intro">自己紹介</option>
-                    <option value="#section-industry">美容業界の状況</option>
-                    <option value="#section-company-investment">会社の投資</option>
-                    <option value="#section-your-role">あなたの役割</option>
-                    <option value="#section-future">共に創る未来</option>
-                </select>
-            </div>
-        </nav>
-    </header>
-
     <main>
-        <section id="section-intro" class="py-16 md:py-24 bg-[#F8F5F2]">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-3xl md:text-5xl font-bold mb-4 text-[#A57E58]">自己紹介</h1>
-                <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
-                    私のこれまでの歩みをご紹介します。
+        <section id="section-intro" class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">自己紹介</h1>
+            <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
+                私のこれまでの歩みをご紹介します。
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center bg-white p-8 rounded-xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
+                <div class="md:w-1/3 flex flex-col items-center">
+                    <img src="https://sr-shindan.jp/data/social/3658/main_2024-07-21.jpg" alt="磯山 大樹氏の写真" class="rounded-full w-48 h-48 object-cover mb-4 shadow-md">
+                    <h3 class="text-2xl font-bold text-gray-800">磯山 大樹 Isoyama Taiki</h3>
+                    <p class="text-sm text-gray-500 mt-2 flex items-center">
+                        <img src="https://image.itmedia.co.jp/news/articles/2307/24/l_my_0724twitter05.jpg" alt="Xアイコン" class="inline-block h-4 w-4 mr-1 align-middle">@isoyama_tax
+                    </p>
+                </div>
+                <div class="md:w-2/3 text-left md:ml-8 mt-8 md:mt-0">
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 text-lg">&#9679;</span>
+                            <div><span class="font-bold">1989年:</span> 福岡市生まれ</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 text-lg">&#9679;</span>
+                            <div><span class="font-bold">2014年:</span> 福岡大学大学院卒業・税理士試験合格</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 text-lg">&#9679;</span>
+                            <div><span class="font-bold">2017年:</span> 税理士登録・独立開業</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 text-lg">&#9679;</span>
+                            <div><span class="font-bold">2019年:</span> エンジョイント税理士法人設立</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 text-lg">&#9679;</span>
+                            <div><span class="font-bold">2023年:</span> 社労士試験合格</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 text-lg">&#9679;</span>
+                            <div><span class="font-bold">2024年:</span> エンジョイント社会保険労務士法人設立</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-industry" class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">美容業界の状況</h1>
+            <h2 class="text-lg md:text-xl font-light text-gray-700 mb-8">変化する経営環境と「当たり前」ではない経営努力</h2>
+            <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
+                美容業界は今、大きな変化の渦中にあります。市場規模は過去5年でほぼ横ばいですが、美容師の数や美容室の店舗数は増加傾向にあります。これはつまり、1店舗あたりの売上が減少傾向にあることを意味しており、競争が激化している現実を示しています。
+                このような厳しい環境の中で、皆さんの会社がしっかりと成長できていることは、本当に素晴らしい経営努力の証だと感じています。
+            </p>
+            <img src="https://www.beautopia.jp/wp-content/uploads/2024/06/HOT-PEPPER-Beauty-Academy-hair-salon-barber-shop-1.png" alt="美容室市場規模と前年比のグラフ" class="mx-auto rounded-lg shadow-md">
+            <p class="text-sm text-gray-500 mt-4">美容業界の市場規模と競合環境のイメージ</p>
+        </section>
+
+        <section id="section-company-investment" class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3">選ばれる会社になるために</h2>
+                <p class="text-lg text-gray-600">経営者が皆さんのために費やす「投資」の意味</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <h3 class="text-2xl font-bold text-gray-500 mb-4 text-center">「量」から「質」への経営シフト</h3>
+                    <p class="text-gray-600 mb-6">
+                        なぜ会社は「質」を重視するのでしょうか？ それは単に売上を追うだけでなく、会社の成長の源泉である**「利益」**を確保し、未来への投資を持続するためです。「質」の向上は、顧客単価、リピート率、そして皆さんの生産性を高め、より強い会社を創り出します。
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 利益率の向上</div>
+                        <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 顧客単価のアップ</div>
+                        <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> リピート率の安定</div>
+                        <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 従業員の生産性向上</div>
+                    </div>
+                </div>
+                <div class="bg-[#A57E58] text-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-4 text-center">皆さんの待遇は「特別」です</h3>
+                    <p class="mb-6 opacity-90">
+                        厳しい経営環境の中、皆さんの会社は従業員への待遇や教育に、惜しみない投資をしています。これは税理士の視点から見ても、決して「当たり前」ではありません。給与水準、福利厚生、そして成長の機会。これらは全て、社長が皆さんを大切に思い、会社の未来に不可欠な存在だと考えている証なのです。
+                    </p>
+                     <div class="text-center bg-white/20 p-4 rounded-lg">
+                        <p class="font-bold text-lg">未来への投資 ＝ 皆さんへの投資</p>
+                        <p class="text-sm opacity-80">教育カリキュラムの整備や、リッツカールトン視察のような学びの機会は、会社と皆さんが共に成長するための重要な戦略です。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-your-role" class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3">成果への道筋</h2>
+                <p class="text-lg text-gray-600">あなたの行動が、会社の利益、そしてあなたの給与に繋がる仕組み</p>
+                <p class="max-w-2xl mx-auto text-gray-500 mt-4">美容業界で語られる「新卒給与30万円」を実現するには、会社がそれを「払える会社」になる必要があります。その鍵は、店長クラスだけでなく、アシスタントからスタイリストまで、全員の「伸びしろ」にあります。以下の行動がどう利益に繋がるかを見てみましょう。</p>
+            </div>
+
+            <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="bg-gray-100 text-gray-700 p-3 rounded-lg text-center font-bold">早期の技術習得とスタイリストデビュー</div>
+                        <p class="text-sm text-gray-600 mt-2 p-2">顧客を担当することで直接売上に貢献できます。あなたの技術が会社の基盤を強くします。</p>
+                    </div>
+                    <div>
+                        <div class="bg-gray-100 text-gray-700 p-3 rounded-lg text-center font-bold">客単価アップに繋がる提案</div>
+                        <p class="text-sm text-gray-600 mt-2 p-2">お客様一人ひとりに合ったメニューや商品を提案することで、顧客満足度と客単価が向上します。これは会社の利益率を直接押し上げます。</p>
+                    </div>
+                    <div>
+                        <div class="bg-gray-100 text-gray-700 p-3 rounded-lg text-center font-bold">リピート率向上への貢献</div>
+                        <p class="text-sm text-gray-600 mt-2 p-2">「またあなたにお願いしたい」と思ってもらえる関係を築くこと。安定したリピート顧客は、会社の経営を安定させる最も重要な資産です。</p>
+                    </div>
+                    <div>
+                        <div class="bg-gray-100 text-gray-700 p-3 rounded-lg text-center font-bold">生産性向上への貢献</div>
+                        <p class="text-sm text-gray-600 mt-2 p-2">予約管理の工夫や準備の効率化など、日々の業務で無駄をなくす努力は、コスト削減に繋がり、会社の利益を増やします。</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <div class="bg-gray-100 text-gray-700 p-3 rounded-lg text-center font-bold">チームとしての協力</div>
+                        <p class="text-sm text-gray-600 mt-2 p-2">個人のスキルだけでなく、チーム全体で助け合い、情報を共有することで、店舗全体の売上が最大化します。1+1を3にする力です。</p>
+                    </div>
+                </div>
+
+                <p class="text-base text-gray-700 mt-6 max-w-2xl mx-auto">
+                    社長が特にスタイリストの協力体制を重視しているのは、個々のスキルアップだけでなく、チームとしての相乗効果が、より大きな利益を生むからです。
                 </p>
-                <div class="flex flex-col md:flex-row items-center justify-center bg-white p-8 rounded-xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
-                    <div class="md:w-1/3 flex flex-col items-center">
-                        <img src="https://sr-shindan.jp/data/social/3658/main_2024-07-21.jpg" alt="磯山 大樹氏の写真" class="rounded-full w-48 h-48 object-cover mb-4 shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/300x300/E6DCD1/3D3D3D?text=Image+Not+Found';">
-                        <h3 class="text-2xl font-bold text-gray-800">磯山 大樹 Isoyama Taiki</h3>
-                        <p class="text-sm text-gray-500 mt-2 flex items-center">
-                            <img src="https://image.itmedia.co.jp/news/articles/2307/24/l_my_0724twitter05.jpg" alt="Xアイコン" class="inline-block h-4 w-4 mr-1 align-middle">@isoyama_tax
-                        </p>
+
+                <div class="text-center my-8">
+                    <p class="text-lg text-gray-600 mb-2">これらの行動がもたらすもの</p>
+                    <span class="print-arrow-down text-[#A57E58] block">&#8595;</span>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 mt-8">
+                    <div class="bg-blue-100 text-blue-800 p-4 rounded-lg text-center flex items-center justify-center flex-1">
+                        <h4 class="font-bold text-xl">会社の利益 増加</h4>
                     </div>
-                    <div class="md:w-2/3 text-left md:ml-8 mt-8 md:mt-0">
-                        <ul class="space-y-4 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">1989年:</span> 福岡市生まれ</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2014年:</span> 福岡大学大学院卒業・税理士試験合格</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2017年:</span> 税理士登録・独立開業</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2019年:</span> エンジョイント税理士法人設立</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2023年:</span> 社労士試験合格</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2024年:</span> エンジョイント社会保険労務士法人設立</div>
-                            </li>
-                        </ul>
+                    <div class="text-3xl font-bold text-gray-300 print-arrow-inline">&amp;</div>
+                    <div class="bg-green-100 text-green-800 p-4 rounded-lg text-center flex items-center justify-center flex-1">
+                         <h4 class="font-bold text-xl">あなたの給与 アップ</h4>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="section-industry" class="py-16 md:py-24 bg-[#F8F5F2]">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-3xl md:text-5xl font-bold mb-4 text-[#A57E58]">美容業界の状況</h1>
-                <h2 class="text-lg md:text-xl font-light text-gray-700 mb-8">変化する経営環境と「当たり前」ではない経営努力</h2>
-                <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
-                    美容業界は今、大きな変化の渦中にあります。市場規模は過去5年でほぼ横ばいですが、美容師の数や美容室の店舗数は増加傾向にあります。これはつまり、1店舗あたりの売上が減少傾向にあることを意味しており、競争が激化している現実を示しています。
-                    このような厳しい環境の中で、皆さんの会社がしっかりと成長できていることは、本当に素晴らしい経営努力の証だと感じています。
-                </p>
-                <img src="https://www.beautopia.jp/wp-content/uploads/2024/06/HOT-PEPPER-Beauty-Academy-hair-salon-barber-shop-1.png" alt="美容室市場規模と前年比のグラフ" class="mx-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x300/FDFBF8/3D3D3D?text=Beauty+Industry+Overview';">
-                <p class="text-sm text-gray-500 mt-4">美容業界の市場規模と競合環境のイメージ</p>
-            </div>
-        </section>
+        <section id="section-future" class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">共に創る未来</h2>
+            <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">会社の成長なくして個人の成長なし、個人の成長なくして会社の成長なし。これは中小企業経営の揺るぎない原則です。</p>
 
-        <section id="section-company-investment" class="py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">選ばれる会社になるために</h2>
-                    <p class="text-lg text-gray-600">経営者が皆さんのために費やす「投資」の意味</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
-                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                        <h3 class="text-2xl font-bold text-gray-500 mb-4 text-center">「量」から「質」への経営シフト</h3>
-                        <p class="text-gray-600 mb-6">
-                            なぜ会社は「質」を重視するのでしょうか？ それは単に売上を追うだけでなく、会社の成長の源泉である**「利益」**を確保し、未来への投資を持続するためです。「質」の向上は、顧客単価、リピート率、そして皆さんの生産性を高め、より強い会社を創り出します。
-                        </p>
-                        <div class="space-y-3">
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 利益率の向上</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 顧客単価のアップ</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> リピート率の安定</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 従業員の生産性向上</div>
+            <div class="relative flex items-center justify-center p-8">
+                <div class="absolute w-64 h-64 border-4 border-dashed border-[#D1C4B8] rounded-full" style="animation-duration: 20s;"></div>
+                <div class="absolute w-48 h-48 border-4 border-dashed border-[#A57E58] rounded-full" style="animation-duration: 15s; animation-direction: reverse;"></div>
+                <div class="z-10 bg-white p-8 rounded-full shadow-2xl">
+                    <div class="text-center">
+                        <div class="font-bold text-xl text-[#A57E58]">成長のスパイラル</div>
+                        <div class="my-2">
+                            <span class="text-lg">会社の支援・投資</span>
+                            <span class="text-2xl mx-2">⇄</span>
+                            <span class="text-lg">あなたの成長・成果</span>
                         </div>
-                    </div>
-                    <div class="bg-[#A57E58] text-white p-8 rounded-xl shadow-xl">
-                        <h3 class="text-2xl font-bold mb-4 text-center">皆さんの待遇は「特別」です</h3>
-                        <p class="mb-6 opacity-90">
-                            厳しい経営環境の中、皆さんの会社は従業員への待遇や教育に、惜しみない投資をしています。これは税理士の視点から見ても、決して「当たり前」ではありません。給与水準、福利厚生、そして成長の機会。これらは全て、社長が皆さんを大切に思い、会社の未来に不可欠な存在だと考えている証なのです。
-                        </p>
-                         <div class="text-center bg-white/20 p-4 rounded-lg">
-                            <p class="font-bold text-lg">未来への投資 ＝ 皆さんへの投資</p>
-                            <p class="text-sm opacity-80">教育カリキュラムの整備や、リッツカールトン視察のような学びの機会は、会社と皆さんが共に成長するための重要な戦略です。</p>
-                        </div>
+                        <div class="text-gray-600">この好循環が、豊かな未来を創ります。</div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="section-your-role" class="py-16 md:py-24 bg-[#F8F5F2]">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">成果への道筋</h2>
-                    <p class="text-lg text-gray-600">あなたの行動が、会社の利益、そしてあなたの給与に繋がる仕組み</p>
-                    <p class="max-w-2xl mx-auto text-gray-500 mt-4">美容業界で語られる「新卒給与30万円」を実現するには、会社がそれを「払える会社」になる必要があります。その鍵は、店長クラスだけでなく、アシスタントからスタイリストまで、全員の「伸びしろ」にあります。以下の項目をクリックして、あなたの行動がどう利益に繋がるかを見てみましょう。</p>
-                </div>
-
-                <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100">
-                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 gear-path mb-8">
-                        <div id="action-item-1" data-id="1" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">早期の技術習得</div>
-                        <div id="path-line-1" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-2" data-id="2" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">客単価アップ提案</div>
-                        <div id="path-line-2" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-3" data-id="3" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">リピート率向上</div>
-                        <div id="path-line-3" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-4" data-id="4" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">生産性向上</div>
-                        <div id="path-line-4" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-5" data-id="5" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">チームでの協力</div>
-                    </div>
-
-                    <div class="text-center my-4">
-                        <p class="text-lg text-gray-600 mb-2">これらの行動がもたらすもの</p>
-                        <span class="text-5xl text-[#A57E58] block">&#8595;</span> <!-- Unicode Downwards Arrow -->
-                    </div>
-
-                    <div id="explanation-box" class="mt-8 p-6 bg-gray-50 rounded-lg min-h-[100px] transition-all duration-300">
-                        <p id="explanation-text" class="text-gray-700">上の行動を選択してください。</p>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 mt-8">
-                        <div id="result-profit" class="bg-blue-100 text-blue-800 p-4 rounded-lg text-center transition-all duration-300 flex items-center justify-center">
-                            <h4 class="font-bold text-xl">会社の利益 増加</h4>
-                        </div>
-                        <div class="text-3xl font-bold text-gray-300">&amp;</div>
-                        <div id="result-salary" class="bg-green-100 text-green-800 p-4 rounded-lg text-center transition-all duration-300 flex items-center justify-center">
-                             <h4 class="font-bold text-xl">あなたの給与 アップ</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="section-future" class="py-16 md:py-24">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">共に創る未来</h2>
-                <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">会社の成長なくして個人の成長なし、個人の成長なくして会社の成長なし。これは中小企業経営の揺るぎない原則です。</p>
-
-                <div class="relative flex items-center justify-center p-8">
-                    <div class="absolute w-64 h-64 border-4 border-dashed border-[#D1C4B8] rounded-full animate-spin" style="animation-duration: 20s;"></div>
-                    <div class="absolute w-48 h-48 border-4 border-dashed border-[#A57E58] rounded-full animate-spin" style="animation-duration: 15s; animation-direction: reverse;"></div>
-                    <div class="z-10 bg-white p-8 rounded-full shadow-2xl">
-                        <div class="text-center">
-                            <div class="font-bold text-xl text-[#A57E58]">成長のスパイラル</div>
-                            <div class="my-2">
-                                <span class="text-lg">会社の支援・投資</span>
-                                <span class="text-2xl mx-2">⇄</span>
-                                <span class="text-lg">あなたの成長・成果</span>
-                            </div>
-                            <div class="text-gray-600">この好循環が、豊かな未来を創ります。</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Removed the concluding paragraph as per user request -->
-                <!-- Removed "もう一度、はじめから見る" button as per user request -->
             </div>
         </section>
     </main>
-
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>あなたの成長が、会社の成長に繋がる。</p>
-            <p class="text-sm text-gray-400 mt-2">&copy; 2025 Your Company Name. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const gearItems = document.querySelectorAll('.gear-item');
-            const explanationText = document.getElementById('explanation-text');
-            const resultProfit = document.getElementById('result-profit');
-            const resultSalary = document.getElementById('result-salary');
-            const pathLines = document.querySelectorAll('.path-line');
-
-
-            const explanations = {
-                1: 'スタイリストとして早期にデビューし、多くのお客様を担当することは、直接会社の売上に貢献します。あなたの技術が会社の基盤を強くします。',
-                2: 'お客様一人ひとりに合ったメニューや商品を提案することで、顧客満足度と客単価が向上します。これは会社の利益率を直接押し上げます。',
-                3: '「またあなたにお願いしたい」と思ってもらえる関係を築くこと。安定したリピート顧客は、会社の経営を安定させる最も重要な資産です。',
-                4: '予約管理の工夫や準備の効率化など、日々の業務で無駄をなくす努力は、コスト削減に繋がり、会社の利益を増やします。',
-                5: '個人のスキルだけでなく、チーム全体で助け合い、情報を共有することで、店舗全体の売上が最大化します。1+1を3にする力です。'
-            };
-
-            let activeItem = null;
-
-            gearItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const id = item.dataset.id;
-
-                    if (activeItem === id) {
-                         // Deselect
-                        item.classList.remove('active');
-                        // Deactivate all path lines
-                        pathLines.forEach(line => line.classList.remove('active'));
-                        explanationText.parentElement.style.opacity = '0.5';
-                        explanationText.textContent = '上の行動を選択してください。';
-                        resultProfit.style.transform = 'scale(1)';
-                        resultSalary.style.transform = 'scale(1)';
-                        activeItem = null;
-
-                    } else {
-                        // Deselect previous
-                        if (activeItem) {
-                            document.getElementById('action-item-' + activeItem).classList.remove('active');
-                        }
-                        // Deactivate all path lines
-                        pathLines.forEach(line => line.classList.remove('active'));
-
-
-                        // Select new
-                        item.classList.add('active');
-                        // Activate path lines up to the selected item
-                        for (let i = 1; i < id; i++) {
-                            document.getElementById('path-line-' + i)?.classList.add('active');
-                        }
-
-
-                        explanationText.parentElement.style.opacity = '1';
-                        explanationText.textContent = explanations[id];
-                        resultProfit.style.transform = 'scale(1.1)';
-                        resultSalary.style.transform = 'scale(1.1)';
-                        activeItem = id;
-                    }
-                });
-            });
-
-            const navLinks = document.querySelectorAll('a[href^="#"]');
-            navLinks.forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            const mobileNav = document.getElementById('mobile-nav');
-            mobileNav.addEventListener('change', function(e) {
-                const targetId = e.target.value;
-                 document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-            });
-
-            const sections = document.querySelectorAll('section');
-            const desktopNavLinks = document.querySelectorAll('.nav-link');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        desktopNavLinks.forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-                        });
-                        mobileNav.value = `#${entry.target.id}`;
-                    }
-                });
-            }, { rootMargin: '-50% 0px -50% 0px' });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
 </html>
