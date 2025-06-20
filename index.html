@@ -3,28 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>共に創る未来 | 税理士が見る、ビジネスのリアル</title>
+    <title>組織改革SPAインフォグラフィック | 持続的成長へのロードマップ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutral Harmony -->
-    <!-- Application Structure Plan: A single-page, vertical-scrolling narrative application. The structure is thematic, not slide-by-slide, to create a flowing story. It now starts with a personal self-introduction, followed by the broad context (Why is change needed?), moves to the company's specific strategy (How are we changing?), then focuses on the individual's role (What can I do?), and ends with a shared vision (What is our future?). The "Growth Idea Generator" section has been removed as requested. A fixed top navigation allows non-linear exploration for users who want to jump to specific topics. -->
-    <!-- Visualization & Content Choices:
-        1. Self-Introduction (New Section) -> Goal: Inform/Build Trust -> Viz: Image and structured text (HTML/CSS), image-based X icon -> Interaction: None -> Justification: Establishes credibility and a personal connection at the outset. Uses provided image for icon.
-        2. Industry Situation (Section 1 - previously Economic Trend) -> Goal: Inform -> Viz: Textual analysis and actual market data image -> Interaction: None -> Justification: Provides industry context while highlighting the company's strength within it, aligning with new user request. Uses actual image for data.
-        3. Strategy Shift (Section 2) -> Goal: Compare -> Viz: HTML/CSS side-by-side cards -> Interaction: Click reveals details -> Justification: Clearly contrasts "Quantity vs. Quality," making the strategic choice intuitive and memorable.
-        4. Future Investment (Section 3 - previously Section 4) -> Goal: Inform -> Viz: Icon-based info cards (HTML/CSS) -> Interaction: None -> Justification: Presents key investments (talent, service) in a clean, easily scannable format.
-        5. Action-to-Reward Path (Section 4 - previously Section 3) -> Goal: Relationships -> Viz: Interactive diagram (HTML/CSS/JS) -> Interaction: Clicking an action highlights the causal chain (Action -> Profit -> Salary) and updates a text panel. Improved arrow visualization with descriptive text, changed horizontal arrows to '&', and moved explanation box. -> Justification: This is the core interactive element. It makes the abstract connection between work and pay tangible and explorable, which is highly motivating. Removed "potential" chart as requested.
-        6. Growth Cycle (Section 5 - previously Section 4) -> Goal: Organize/Inform -> Viz: "Growth Spiral" (HTML/CSS) with added emphasis on teamwork -> Interaction: Subtle scroll-reveal animation -> Justification: Ends the narrative on a positive, symbolic note of shared growth, visually representing the "Win-Win" principle, now specifically highlighting the company's strength in teamwork and refining the loop explanation. Removed concluding text and button.
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 
+        Color Palette: Brilliant Blues (#003f5c, #2f4b7c, #665191, #a05195, #d45087, #f95d6a, #ff7c43, #ffa600)
+        Narrative Plan:
+        1. The Breaking Point: Visualize the current critical issues (inefficiency, workflow cycles, senior overload).
+        2. The Turning Point: Clearly show the core "Before vs. After" of the specialization strategy.
+        3. The New Blueprint: Detail the new organizational structure and workflow visually.
+        4. Forging a Stronger Team: Highlight the new systems for training and quality control.
+        5. The Path to a Brighter Future: Conclude with the expected benefits and a clear implementation timeline.
+        Visualization Plan:
+        - Inefficient Training: Line chart for skill decay, Bar chart for efficiency comparison, Donut chart for wasted time. (Goal: Compare, Inform. Tool: Chart.js. NO SVG).
+        - Vicious Workflow Cycle: Flow chart diagram. (Goal: Organize. Tool: HTML/CSS with Tailwind. NO SVG, NO MERMAID JS).
+        - Senior Staff Overload: Stacked Bar Chart for time distribution, HTML/CSS diagram for pressure points. (Goal: Compare, Organize. Tool: Chart.js, HTML/CSS. NO SVG).
+        - Specialization: Before/After diagram. (Goal: Compare. Tool: HTML/CSS. NO SVG).
+        - New Org Chart: Hierarchical diagram. (Goal: Organize. Tool: HTML/CSS. NO SVG).
+        - Training & QC: Donut/Gauge chart for test score, Unicode pictograph for checks. (Goal: Inform. Tool: Chart.js, HTML/Unicode. NO SVG).
+        - Expected Effects: Radar chart comparing before/after metrics. (Goal: Compare. Tool: Chart.js. NO SVG).
+        - Timeline: Vertical timeline diagram. (Goal: Change. Tool: HTML/CSS. NO SVG).
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All visualizations are created using Chart.js on Canvas or structured HTML/CSS with Tailwind.
     -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            font-family: 'Noto Sans+Sans+JP', sans-serif;
-            background-color: #FDFBF8;
-            color: #3D3D3D;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f4f8;
         }
         .chart-container {
             position: relative;
@@ -33,351 +40,441 @@
             margin-left: auto;
             margin-right: auto;
             height: 300px;
-            max-height: 40vh;
+            max-height: 400px;
         }
-        .nav-link {
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
         }
-        .nav-link:hover, .nav-link.active {
-            color: #A57E58;
-            border-bottom-color: #A57E58;
+        .flow-arrow::after {
+            content: '▼';
+            font-size: 1.5rem;
+            color: #d45087;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -28px;
         }
-        .gear-path > div { transition: all 0.3s ease-in-out; }
-        .gear-item.active {
-            background-color: #A57E58 !important;
-            color: #FFFFFF !important;
-            transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        .flow-arrow-side::after {
+            content: '▶';
+            font-size: 1.5rem;
+            color: #d45087;
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            transform: translateY(-50%);
         }
-        .path-line {
-            transition: all 0.5s ease-in-out;
-            background-color: #D1C4B8;
-        }
-        .path-line.active {
-            background-color: #A57E58;
-        }
-        .arrow-right {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-left: 8px solid #A57E58;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #A57E58;
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            background-color: #ff7c43;
+            border: 4px solid #f0f4f8;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-gray-800">
 
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="text-xl font-bold text-gray-800">
-                共に創る未来
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#section-intro" class="nav-link text-gray-600 pb-1">自己紹介</a>
-                <a href="#section-industry" class="nav-link text-gray-600 pb-1">美容業界の状況</a>
-                <a href="#section-company-investment" class="nav-link text-gray-600 pb-1">会社の投資</a>
-                <a href="#section-your-role" class="nav-link text-gray-600 pb-1">あなたの役割</a>
-                <a href="#section-future" class="nav-link text-gray-600 pb-1">共に創る未来</a>
-            </div>
-            <div class="md:hidden">
-                <select id="mobile-nav" class="block w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="#section-intro">自己紹介</option>
-                    <option value="#section-industry">美容業界の状況</option>
-                    <option value="#section-company-investment">会社の投資</option>
-                    <option value="#section-your-role">あなたの役割</option>
-                    <option value="#section-future">共に創る未来</option>
-                </select>
-            </div>
-        </nav>
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#003f5c] to-[#665191]">組織体制の改革と持続的成長に向けた改善案</h1>
+            <p class="text-center text-gray-500 mt-1">業務プロセスの最適化と人材育成の仕組み化による組織基盤の構築</p>
+        </div>
     </header>
 
-    <main>
-        <section id="section-intro" class="py-16 md:py-24 bg-[#F8F5F2]">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-3xl md:text-5xl font-bold mb-4 text-[#A57E58]">自己紹介</h1>
-                <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
-                    私のこれまでの歩みをご紹介します。
-                </p>
-                <div class="flex flex-col md:flex-row items-center justify-center bg-white p-8 rounded-xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
-                    <div class="md:w-1/3 flex flex-col items-center">
-                        <img src="https://sr-shindan.jp/data/social/3658/main_2024-07-21.jpg" alt="磯山 大樹氏の写真" class="rounded-full w-48 h-48 object-cover mb-4 shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/300x300/E6DCD1/3D3D3D?text=Image+Not+Found';">
-                        <h3 class="text-2xl font-bold text-gray-800">磯山 大樹 Isoyama Taiki</h3>
-                        <p class="text-sm text-gray-500 mt-2 flex items-center">
-                            <img src="https://image.itmedia.co.jp/news/articles/2307/24/l_my_0724twitter05.jpg" alt="Xアイコン" class="inline-block h-4 w-4 mr-1 align-middle">@isoyama_tax
-                        </p>
-                    </div>
-                    <div class="md:w-2/3 text-left md:ml-8 mt-8 md:mt-0">
-                        <ul class="space-y-4 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">1989年:</span> 福岡市生まれ</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2014年:</span> 福岡大学大学院卒業・税理士試験合格</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2017年:</span> 税理士登録・独立開業</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2019年:</span> エンジョイント税理士法人設立</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2023年:</span> 社労士試験合格</div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-3 text-lg">&#9679;</span>
-                                <div><span class="font-bold">2024年:</span> エンジョイント社会保険労務士法人設立</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main class="container mx-auto p-4 md:p-8">
 
-        <section id="section-industry" class="py-16 md:py-24 bg-[#F8F5F2]">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-3xl md:text-5xl font-bold mb-4 text-[#A57E58]">美容業界の状況</h1>
-                <h2 class="text-lg md:text-xl font-light text-gray-700 mb-8">変化する経営環境と「当たり前」ではない経営努力</h2>
-                <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed mb-12">
-                    美容業界は今、大きな変化の渦中にあります。市場規模は過去5年でほぼ横ばいですが、美容師の数や美容室の店舗数は増加傾向にあります。これはつまり、1店舗あたりの売上が減少傾向にあることを意味しており、競争が激化している現実を示しています。
-                    このような厳しい環境の中で、皆さんの会社がしっかりと成長できていることは、本当に素晴らしい経営努力の証だと感じています。
-                </p>
-                <img src="https://www.beautopia.jp/wp-content/uploads/2024/06/HOT-PEPPER-Beauty-Academy-hair-salon-barber-shop-1.png" alt="美容室市場規模と前年比のグラフ" class="mx-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x300/FDFBF8/3D3D3D?text=Beauty+Industry+Overview';">
-                <p class="text-sm text-gray-500 mt-4">美容業界の市場規模と競合環境のイメージ</p>
-            </div>
-        </section>
+        <section id="kadai" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#003f5c]">ボトルネックは3つ。組織が直面する深刻な課題</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">現在の組織は、人材育成、業務プロセス、そして組織構造そのものに深刻な課題を抱えています。これらが相互に影響し合い、組織全体の生産性と成長を阻害しています。</p>
 
-        <section id="section-company-investment" class="py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">選ばれる会社になるために</h2>
-                    <p class="text-lg text-gray-600">経営者が皆さんのために費やす「投資」の意味</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-4 text-[#2f4b7c]">課題① 人材育成の仕組みが不十分</h3>
+                    <p class="mb-6 text-gray-600">OJTに依存した教育は、シニア層の負担を増大させるだけでなく、ジュニア層のスキル習熟度にバラつきを生み出しています。結果として、スキルの陳腐化や非効率な手待ち時間が発生しています。</p>
+                    <div class="chart-container h-64 md:h-72">
+                        <canvas id="skillChart"></canvas>
+                    </div>
+                     <p class="text-center text-sm text-gray-500 mt-2">OJT依存によるジュニア層のスキル低下（概念図）</p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
-                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                        <h3 class="text-2xl font-bold text-gray-500 mb-4 text-center">「量」から「質」への経営シフト</h3>
-                        <p class="text-gray-600 mb-6">
-                            なぜ会社は「質」を重視するのでしょうか？ それは単に売上を追うだけでなく、会社の成長の源泉である**「利益」**を確保し、未来への投資を持続するためです。「質」の向上は、顧客単価、リピート率、そして皆さんの生産性を高め、より強い会社を創り出します。
-                        </p>
-                        <div class="space-y-3">
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 利益率の向上</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 顧客単価のアップ</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> リピート率の安定</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-3">✔</span> 従業員の生産性向上</div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-4 text-[#2f4b7c]">課題② 業務プロセスの悪循環</h3>
+                    <p class="mb-6 text-gray-600">フィードバックの遅延が、繁忙期での大規模な手戻りを誘発。一つの遅延が他の業務を圧迫し、常に後手に回るという負のスパイラルに陥っています。</p>
+                    <div class="p-6">
+                        <div class="relative grid grid-cols-2 gap-x-8 gap-y-12">
+                            <div class="relative bg-red-100 text-red-800 p-4 rounded-lg shadow-md text-center flow-arrow"><strong>1. 入力遅延</strong><br>初期段階での遅れ</div>
+                            <div class="relative bg-red-100 text-red-800 p-4 rounded-lg shadow-md text-center flow-arrow-side"><strong>2. ミス発覚</strong><br>繁忙期に表面化</div>
+                            <div class="relative bg-red-100 text-red-800 p-4 rounded-lg shadow-md text-center"><strong>4. 他業務圧迫</strong><br>スケジュール形骸化</div>
+                            <div class="relative bg-red-100 text-red-800 p-4 rounded-lg shadow-md text-center"><strong>3. 大規模な手戻り</strong><br>生産性が大幅低下</div>
                         </div>
                     </div>
-                    <div class="bg-[#A57E58] text-white p-8 rounded-xl shadow-xl">
-                        <h3 class="text-2xl font-bold mb-4 text-center">皆さんの待遇は「特別」です</h3>
-                        <p class="mb-6 opacity-90">
-                            厳しい経営環境の中、皆さんの会社は従業員への待遇や教育に、惜しみない投資をしています。これは税理士の視点から見ても、決して「当たり前」ではありません。給与水準、福利厚生、そして成長の機会。これらは全て、社長が皆さんを大切に思い、会社の未来に不可欠な存在だと考えている証なのです。
-                        </p>
-                         <div class="text-center bg-white/20 p-4 rounded-lg">
-                            <p class="font-bold text-lg">未来への投資 ＝ 皆さんへの投資</p>
-                            <p class="text-sm opacity-80">教育カリキュラムの整備や、リッツカールトン視察のような学びの機会は、会社と皆さんが共に成長するための重要な戦略です。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2">
+                    <h3 class="font-bold text-xl mb-4 text-[#2f4b7c]">課題③ 組織構造の歪みとシニア層への負荷集中</h3>
+                    <p class="mb-6 text-gray-600">シニア層がプレイヤー、管理者、教育者など複数の役割を一人で担い、本来注力すべき高付加価値業務や仕組み作りに時間を割けていません。これが組織全体のボトルネックとなっています。</p>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container h-80">
+                            <canvas id="seniorWorkloadChart"></canvas>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4">
+                             <div class="relative border-4 border-dashed border-[#d45087] rounded-full w-32 h-32 flex items-center justify-center text-center font-bold text-[#d45087] bg-red-50">シニア層</div>
+                             <div class="absolute text-center" style="transform: translate(-120px, -60px);">👨‍💼<br>顧客対応</div>
+                             <div class="absolute text-center" style="transform: translate(120px, -60px);">📈<br>実務作業</div>
+                             <div class="absolute text-center" style="transform: translate(-120px, 60px);">👨‍🏫<br>部下育成</div>
+                             <div class="absolute text-center" style="transform: translate(120px, 60px);">📋<br>経営報告</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="section-your-role" class="py-16 md:py-24 bg-[#F8F5F2]">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">成果への道筋</h2>
-                    <p class="text-lg text-gray-600">あなたの行動が、会社の利益、そしてあなたの給与に繋がる仕組み</p>
-                    <p class="max-w-2xl mx-auto text-gray-500 mt-4">美容業界で語られる「新卒給与30万円」を実現するには、会社がそれを「払える会社」になる必要があります。その鍵は、店長クラスだけでなく、アシスタントからスタイリストまで、全員の「伸びしろ」にあります。以下の項目をクリックして、あなたの行動がどう利益に繋がるかを見てみましょう。</p>
+        <section id="kaizen" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#665191]">解決策は「専門特化」。分業体制への移行</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">属人的な「一人完結型」から脱却し、業務の専門性に応じた「分業体制」へと移行します。これにより、各員が専門性を高め、組織全体としての品質と効率を最大化します。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-200 rounded-lg p-8 text-center border-4 border-dashed border-gray-400">
+                    <h4 class="text-2xl font-bold text-gray-600 mb-4">Before: 一人完結型</h4>
+                    <p class="text-gray-500 mb-4">全員が会計入力から顧客対応まで担当</p>
+                    <div class="flex flex-wrap gap-2 justify-center text-sm">
+                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">入力</span>
+                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">チェック</span>
+                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">顧客対応</span>
+                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">申告</span>
+                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">教育</span>
+                    </div>
                 </div>
-
-                <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100">
-                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 gear-path mb-8">
-                        <div id="action-item-1" data-id="1" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">早期の技術習得</div>
-                        <div id="path-line-1" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-2" data-id="2" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">客単価アップ提案</div>
-                        <div id="path-line-2" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-3" data-id="3" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">リピート率向上</div>
-                        <div id="path-line-3" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-4" data-id="4" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">生産性向上</div>
-                        <div id="path-line-4" class="w-full md:w-8 h-1 md:h-0.5 bg-transparent relative flex items-center justify-center">
-                            <div class="arrow-right"></div>
-                        </div>
-                        <div id="action-item-5" data-id="5" class="gear-item bg-gray-100 text-gray-700 p-3 rounded-lg cursor-pointer flex-shrink-0 w-full md:w-auto text-center">チームでの協力</div>
-                    </div>
-
-                    <div class="text-center my-4">
-                        <p class="text-lg text-gray-600 mb-2">これらの行動がもたらすもの</p>
-                        <span class="text-5xl text-[#A57E58] block">&#8595;</span> <!-- Unicode Downwards Arrow -->
-                    </div>
-
-                    <div id="explanation-box" class="mt-8 p-6 bg-gray-50 rounded-lg min-h-[100px] transition-all duration-300">
-                        <p id="explanation-text" class="text-gray-700">上の行動を選択してください。</p>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 mt-8">
-                        <div id="result-profit" class="bg-blue-100 text-blue-800 p-4 rounded-lg text-center transition-all duration-300 flex items-center justify-center">
-                            <h4 class="font-bold text-xl">会社の利益 増加</h4>
-                        </div>
-                        <div class="text-3xl font-bold text-gray-300">&amp;</div>
-                        <div id="result-salary" class="bg-green-100 text-green-800 p-4 rounded-lg text-center transition-all duration-300 flex items-center justify-center">
-                             <h4 class="font-bold text-xl">あなたの給与 アップ</h4>
-                        </div>
-                    </div>
+                <div class="bg-gradient-to-br from-[#665191] to-[#a05195] rounded-lg p-8 text-center text-white shadow-2xl">
+                     <h4 class="text-2xl font-bold mb-4">After: 専門特化型</h4>
+                     <p class="opacity-90 mb-4">2つの専門部門を新設</p>
+                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                         <div class="flex-1 bg-white/20 p-4 rounded-lg">
+                            <h5 class="font-bold">BK部門</h5>
+                            <p class="text-sm">会計入力・決算のプロ集団</p>
+                         </div>
+                         <div class="flex-1 bg-white/20 p-4 rounded-lg">
+                            <h5 class="font-bold">CS部門</h5>
+                            <p class="text-sm">顧客対応・申告のプロ集団</p>
+                         </div>
+                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="section-future" class="py-16 md:py-24">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">共に創る未来</h2>
-                <p class="text-xl md:text-2xl font-bold text-[#A57E58] mb-12">Day&Nightの会社の強みはチームで協力して目標に向かっていける事！</p>
+        <section id="shin-taisei" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#a05195]">新組織体制と新たな業務フロー</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">新しい組織体制では、各部門に責任者を配置し、明確な指揮命令系統を確立。部門間の連携を密にし、淀みのない業務フローを実現します。</p>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center">
+                    <div class="inline-block bg-[#a05195] text-white px-6 py-2 rounded-lg shadow-md"><strong>全体統括</strong>: 磯山, 智原</div>
+                    <div class="h-8 w-px bg-gray-300 mx-auto"></div>
+                    <div class="inline-block bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md"><strong>統括補佐・調整役</strong>: 玉山 (8月〜)</div>
+                    <div class="h-8 w-px bg-gray-300 mx-auto"></div>
+                    <div class="flex justify-center">
+                      <div class="w-1/2 h-px bg-gray-300"></div>
+                      <div class="w-1/2 h-px bg-gray-300"></div>
+                    </div>
+                    <div class="flex justify-center">
+                      <div class="w-1/2 border-r border-gray-300 h-8"></div>
+                      <div class="w-1/2 h-8"></div>
+                    </div>
 
-                <div class="relative flex items-center justify-center p-8">
-                    <div class="absolute w-64 h-64 border-4 border-dashed border-[#D1C4B8] rounded-full animate-spin" style="animation-duration: 20s;"></div>
-                    <div class="absolute w-48 h-48 border-4 border-dashed border-[#A57E58] rounded-full animate-spin" style="animation-duration: 15s; animation-direction: reverse;"></div>
-                    <div class="z-10 bg-white p-8 rounded-full shadow-2xl">
-                        <div class="text-center">
-                            <div class="font-bold text-xl text-[#A57E58]">成長のスパイラル</div>
-                            <div class="my-2">
-                                <span class="text-lg">会社の支援・投資</span>
-                                <span class="text-2xl mx-2">⇄</span>
-                                <span class="text-lg">あなたの成長・成果</span>
+                    <div class="flex justify-around gap-4">
+                        <div class="flex-1 text-center">
+                            <div class="inline-block bg-[#003f5c] text-white px-6 py-2 rounded-lg shadow-md"><strong>BK部門長</strong>: 古賀マネージャー</div>
+                            <div class="h-4 w-px bg-gray-300 mx-auto"></div>
+                            <div class="border border-gray-200 p-4 rounded-lg mt-2">
+                                <p>BKジュニア</p>
+                                <p>アシスタント</p>
                             </div>
-                            <div class="text-gray-600">チームの協力が、この好循環を加速させ、豊かな未来を創ります。</div>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <div class="inline-block bg-[#f95d6a] text-white px-6 py-2 rounded-lg shadow-md"><strong>CS部門長</strong>: 内木場マネージャー</div>
+                            <div class="h-4 w-px bg-gray-300 mx-auto"></div>
+                             <div class="border border-gray-200 p-4 rounded-lg mt-2">
+                                <p>CSシニア</p>
+                                <p>CSジュニア</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-[#003f5c]">BK部門の役割</h4>
+                        <p class="text-sm text-gray-600">週次会議で進捗を管理し、CS部門の納期から逆算したスケジュールを徹底します。</p>
+                    </div>
+                     <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-gray-600">連携</h4>
+                        <p class="text-sm text-gray-600">両部門長が密に連携し、情報のサイロ化を防ぎ、円滑な業務遂行を支援します。</p>
+                    </div>
+                     <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-[#f95d6a]">CS部門の役割</h4>
+                        <p class="text-sm text-gray-600">顧客対応と申告業務の進捗を管理し、BK部門へ正確な情報を提供します。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ikusei" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#d45087]">育成と品質管理の新しい仕組み</h2>
+             <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">属人性を排し、「仕組み」で人と品質を担保します。客観的な評価基準と徹底したチェック体制で、組織全体のレベルを底上げします。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-4 text-[#d45087]">✅ 育成の仕組み化</h3>
+                    <ul class="space-y-4 list-disc list-inside text-gray-600">
+                        <li>
+                            <strong>アシスタント:</strong> 実技テスト（合格基準90点）を導入し、客観的なスキル評価を確立。
+                        </li>
+                         <li>
+                            <strong>CSジュニア:</strong> 研修とロープレを制度化し、独り立ちまでを体系的にサポート。
+                        </li>
+                    </ul>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-4 text-[#d45087]">✅ 品質管理の仕組み化</h3>
+                     <ul class="space-y-4 list-disc list-inside text-gray-600">
+                        <li>
+                            <strong>BK部門:</strong> 部門長による全件チェック体制を構築し、入力段階から精度を追求。
+                        </li>
+                         <li>
+                            <strong>CS部門:</strong> 部門長による全件チェックとタスク管理を徹底し、対応漏れを防止。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="kouka" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#f95d6a]">改革がもたらす4つの期待効果</h2>
+             <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">この改革は、品質、生産性、人材、そして組織力という4つの側面で大きな向上をもたらし、企業の持続的成長の基盤となります。</p>
+            <div class="bg-white rounded-lg shadow-lg p-6 lg:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="effectRadarChart"></canvas>
+                    </div>
+                    <div class="space-y-6 flex flex-col justify-center">
+                        <div>
+                            <h4 class="font-bold text-lg text-[#003f5c]">品質向上</h4>
+                            <p class="text-gray-600">専門特化とダブルチェックにより、ミスが削減されサービス品質が均質化します。</p>
+                        </div>
+                         <div>
+                            <h4 class="font-bold text-lg text-[#665191]">生産性向上</h4>
+                            <p class="text-gray-600">業務の悪循環が解消され、標準化によって新たな時間が創出されます。</p>
+                        </div>
+                         <div>
+                            <h4 class="font-bold text-lg text-[#d45087]">人材育成</h4>
+                            <p class="text-gray-600">明確なキャリアパスが、若手の成長意欲を促進し、定着率向上に繋がります。</p>
+                        </div>
+                         <div>
+                            <h4 class="font-bold text-lg text-[#ff7c43]">組織力強化</h4>
+                            <p class="text-gray-600">シニア層の負担が軽減され、高付加価値業務へ集中できる環境が整います。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="keikaku">
+             <h2 class="text-3xl font-bold text-center mb-2 text-[#ff7c43]">実行に向けた計画と成功の鍵</h2>
+             <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">計画は絵に描いた餅ではありません。明確なスケジュールと成功のための留意点を共有し、着実に改革を推進します。</p>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="font-bold text-xl mb-6 text-[#ff7c43]">実行スケジュール</h3>
+                        <div class="relative border-l-2 border-[#ff7c43] pl-8 space-y-10">
+                            <div class="relative timeline-item">
+                                <p class="font-bold">6月下旬: 役員会議での承認</p>
+                                <p class="text-sm text-gray-500">改革の第一歩</p>
+                            </div>
+                            <div class="relative timeline-item">
+                                <p class="font-bold">7月: 全スタッフへの説明会</p>
+                                <p class="text-sm text-gray-500">新体制に向けた準備期間</p>
+                            </div>
+                            <div class="relative timeline-item">
+                                <p class="font-bold">8月: 玉山氏着任と管理職研修</p>
+                                <p class="text-sm text-gray-500">新体制のキーマンが始動</p>
+                            </div>
+                             <div class="relative timeline-item">
+                                <p class="font-bold">9月〜: 新体制での業務試行</p>
+                                <p class="text-sm text-gray-500">移行期間を経て本格稼働へ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-6 text-[#ff7c43]">成功のための留意点</h3>
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-semibold">部門間連携のルール化</h4>
+                                <p class="text-sm text-gray-600">情報共有を円滑にする仕組みを構築します。</p>
+                            </div>
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-semibold">公平な評価制度の設計</h4>
+                                <p class="text-sm text-gray-600">両部門の貢献が正当に評価される制度を設計します。</p>
+                            </div>
+                             <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-semibold">丁寧な移行措置</h4>
+                                <p class="text-sm text-gray-600">スタッフの不安を払拭するためのコミュニケーションを徹底します。</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>あなたの成長が、会社の成長に繋がる。</p>
-            <p class="text-sm text-gray-400 mt-2">&copy; 2025 Your Company Name. All Rights Reserved.</p>
-        </div>
+    
+    <footer class="text-center p-6 mt-12 text-gray-500 text-sm">
+        <p>&copy; 2025 組織改革プロジェクト. All Rights Reserved.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const gearItems = document.querySelectorAll('.gear-item');
-            const explanationText = document.getElementById('explanation-text');
-            const resultProfit = document.getElementById('result-profit');
-            const resultSalary = document.getElementById('result-salary');
-            const pathLines = document.querySelectorAll('.path-line');
+    document.addEventListener('DOMContentLoaded', function () {
+        const brilliantBlues = ['#003f5c', '#665191', '#d45087', '#ff7c43', '#ffa600', '#2f4b7c', '#a05195', '#f95d6a'];
 
-            const explanations = {
-                1: 'スタイリストとして早期にデビューし、多くのお客様を担当することは、直接会社の売上に貢献します。あなたの技術が会社の基盤を強くします。',
-                2: 'お客様一人ひとりに合ったメニューや商品を提案することで、顧客満足度と客単価が向上します。これは会社の利益率を直接押し上げます。',
-                3: '「またあなたにお願いしたい」と思ってもらえる関係を築くこと。安定したリピート顧客は、会社の経営を安定させる最も重要な資産です。',
-                4: '予約管理の工夫や準備の効率化など、日々の業務で無駄をなくす努力は、コスト削減に繋がり、会社の利益を増やします。',
-                5: '個人のスキルだけでなく、チーム全体で助け合い、情報を共有することで、店舗全体の売上が最大化します。1+1を3にする力です。'
-            };
+        function wrapLabel(str, maxWidth) {
+            if (typeof str !== 'string' || str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
 
-            let activeItem = null;
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 < maxWidth) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
 
-            gearItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const id = item.dataset.id;
-
-                    if (activeItem === id) {
-                         // Deselect
-                        item.classList.remove('active');
-                        // Deactivate all path lines
-                        pathLines.forEach(line => line.classList.remove('active'));
-                        explanationText.parentElement.style.opacity = '0.5';
-                        explanationText.textContent = '上の行動を選択してください。';
-                        resultProfit.style.transform = 'scale(1)';
-                        resultSalary.style.transform = 'scale(1)';
-                        activeItem = null;
-
-                    } else {
-                        // Deselect previous
-                        if (activeItem) {
-                            document.getElementById('action-item-' + activeItem).classList.remove('active');
+        const tooltipTitleCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
                         }
-                        // Deactivate all path lines
-                        pathLines.forEach(line => line.classList.remove('active'));
+                    }
+                }
+            }
+        };
 
-
-                        // Select new
-                        item.classList.add('active');
-                        // Activate path lines up to the selected item
-                        for (let i = 1; i < id; i++) {
-                            document.getElementById('path-line-' + i)?.classList.add('active');
+        const skillCtx = document.getElementById('skillChart')?.getContext('2d');
+        if (skillCtx) {
+            new Chart(skillCtx, {
+                type: 'line',
+                data: {
+                    labels: ['入社時', '3ヶ月後', '6ヶ月後', '1年後'],
+                    datasets: [{
+                        label: 'ジュニア層のスキルレベル',
+                        data: [85, 70, 60, 50],
+                        borderColor: brilliantBlues[2],
+                        backgroundColor: 'rgba(212, 80, 135, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...tooltipTitleCallback,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'スキルレベル' }
                         }
-
-
-                        explanationText.parentElement.style.opacity = '1';
-                        explanationText.textContent = explanations[id];
-                        resultProfit.style.transform = 'scale(1.1)';
-                        resultSalary.style.transform = 'scale(1.1)';
-                        activeItem = id;
                     }
-                });
+                }
             });
-
-            const navLinks = document.querySelectorAll('a[href^="#"]');
-            navLinks.forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            const mobileNav = document.getElementById('mobile-nav');
-            mobileNav.addEventListener('change', function(e) {
-                const targetId = e.target.value;
-                 document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-            });
-
-            const sections = document.querySelectorAll('section');
-            const desktopNavLinks = document.querySelectorAll('.nav-link');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        desktopNavLinks.forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-                        });
-                        mobileNav.value = `#${entry.target.id}`;
+        }
+        
+        const seniorWorkloadCtx = document.getElementById('seniorWorkloadChart')?.getContext('2d');
+        if (seniorWorkloadCtx) {
+            new Chart(seniorWorkloadCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['現状', '改革後 (理想)'],
+                    datasets: [
+                        { label: 'プレイヤー業務', data: [50, 10], backgroundColor: brilliantBlues[0] },
+                        { label: '管理者業務', data: [20, 40], backgroundColor: brilliantBlues[1] },
+                        { label: '教育者業務', data: [20, 20], backgroundColor: brilliantBlues[2] },
+                        { label: '仕組みづくり', data: [10, 30], backgroundColor: brilliantBlues[3] }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...tooltipTitleCallback,
+                    scales: {
+                        x: { stacked: true },
+                        y: { stacked: true, title: { display: true, text: '業務時間割合 (%)' } }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        ...tooltipTitleCallback.plugins
                     }
-                });
-            }, { rootMargin: '-50% 0px -50% 0px' });
-
-            sections.forEach(section => {
-                observer.observe(section);
+                }
             });
-        });
+        }
+
+        const effectRadarCtx = document.getElementById('effectRadarChart')?.getContext('2d');
+        if (effectRadarCtx) {
+            new Chart(effectRadarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['品質向上', '生産性向上', '人材育成', '組織力強化', 'シニア層の負荷'],
+                    datasets: [
+                        {
+                            label: '改革前',
+                            data: [4, 5, 3, 4, 9],
+                            borderColor: brilliantBlues[2],
+                            backgroundColor: 'rgba(212, 80, 135, 0.2)',
+                            pointBackgroundColor: brilliantBlues[2]
+                        },
+                        {
+                            label: '改革後 (期待値)',
+                            data: [8, 9, 8, 9, 4],
+                            borderColor: brilliantBlues[1],
+                            backgroundColor: 'rgba(102, 81, 145, 0.2)',
+                             pointBackgroundColor: brilliantBlues[1]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                     ...tooltipTitleCallback,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: { backdropColor: 'transparent' }
+                        }
+                    }
+                }
+            });
+        }
+    });
     </script>
 </body>
 </html>
