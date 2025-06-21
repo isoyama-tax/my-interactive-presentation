@@ -3,35 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>組織改革SPAインフォグラフィック | 持続的成長へのロードマップ</title>
+    <title>組織体制の改革と持続的成長に向けた改善案 - インフォグラフィック</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <!-- 
-        Color Palette: Brilliant Blues (#003f5c, #2f4b7c, #665191, #a05195, #d45087, #f95d6a, #ff7c43, #ffa600)
-        Narrative Plan:
-        1. The Breaking Point: Visualize the current critical issues (inefficiency, workflow cycles, senior overload).
-        2. The Turning Point: Clearly show the core "Before vs. After" of the specialization strategy.
-        3. The New Blueprint: Detail the new organizational structure and workflow visually.
-        4. Forging a Stronger Team: Highlight the new systems for training and quality control.
-        5. The Path to a Brighter Future: Conclude with the expected benefits and a clear implementation timeline.
-        Visualization Plan:
-        - Inefficient Training: Line chart for skill decay, Bar chart for efficiency comparison, Donut chart for wasted time. (Goal: Compare, Inform. Tool: Chart.js. NO SVG).
-        - Vicious Workflow Cycle: Flow chart diagram. (Goal: Organize. Tool: HTML/CSS with Tailwind. NO SVG, NO MERMAID JS).
-        - Senior Staff Overload: Stacked Bar Chart for time distribution, HTML/CSS diagram for pressure points. (Goal: Compare, Organize. Tool: Chart.js, HTML/CSS. NO SVG).
-        - Specialization: Before/After diagram. (Goal: Compare. Tool: HTML/CSS. NO SVG).
-        - New Org Chart: Hierarchical diagram. (Goal: Organize. Tool: HTML/CSS. NO SVG).
-        - Training & QC: Donut/Gauge chart for test score, Unicode pictograph for checks. (Goal: Inform. Tool: Chart.js, HTML/Unicode. NO SVG).
-        - Expected Effects: Radar chart comparing before/after metrics. (Goal: Compare. Tool: Chart.js. NO SVG).
-        - Timeline: Vertical timeline diagram. (Goal: Change. Tool: HTML/CSS. NO SVG).
-        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All visualizations are created using Chart.js on Canvas or structured HTML/CSS with Tailwind.
-    -->
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #f0f4f8;
+            background-color: #F0F8FF;
+            color: #003366;
         }
         .chart-container {
             position: relative;
@@ -39,472 +21,414 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
+            height: 320px;
             max-height: 400px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 350px;
+                height: 400px;
             }
         }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -31px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #ff7c43;
-            border: 4px solid #f0f4f8;
-        }
-        /* New custom styling for flowchart */
-        .flowchart-box {
-            background-color: #fcebeb; /* Light red background */
-            color: #b91c1c; /* Darker red text */
+        .flow-box {
+            border: 2px solid #007BFF;
+            background-color: #ffffff;
+            color: #003366;
             padding: 1rem;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
-            position: relative; /* For arrow positioning */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
         }
-        .flowchart-arrow-line {
-            background-color: #d45087; /* Arrow color */
-            position: absolute;
+        .flow-arrow {
+            font-size: 2rem;
+            color: #007BFF;
+            align-self: center;
+            margin: 0 0.5rem;
         }
-        .flowchart-arrowhead {
-            color: #d45087; /* Arrow color */
-            position: absolute;
-            font-size: 1.5rem;
-            line-height: 1; /* Adjust to prevent extra space around character */
+        .gantt-bar {
+            background-color: #007BFF;
+            border-radius: 0.5rem;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            white-space: nowrap;
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="antialiased">
 
-    <header class="bg-white shadow-md sticky top-0 z-10">
-        <div class="container mx-auto px-6 py-4">
-            <h1 class="text-2xl md:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#003f5c] to-[#665191]">組織体制の改革と持続的成長に向けた改善案</h1>
-            <p class="text-center text-gray-500 mt-1">業務プロセスの最適化と人材育成の仕組み化による組織基盤の構築</p>
+    <header class="bg-white py-8 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-[#003366] leading-tight">組織体制の改革と持続的成長に向けた改善案</h1>
+            <p class="mt-2 text-lg md:text-xl text-[#007BFF]">業務プロセスの最適化と人材育成の仕組み化による組織基盤の構築</p>
+            <div class="mt-4 text-sm text-gray-500">
+                <span>発表者: 磯山</span> | <span>日付: 2025年6月30日</span>
+            </div>
         </div>
     </header>
 
-    <main class="container mx-auto p-4 md:p-8">
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
 
-        <section id="kadai" class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#003f5c]">ボトルネックは3つ。組織が直面する深刻な課題</h2>
-            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">現在の組織は、人材育成、業務プロセス、そして組織構造そのものに深刻な課題を抱えています。これらが相互に影響し合い、組織全体の生産性と成長を阻害しています。</p>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="font-bold text-xl mb-4 text-[#2f4b7c]">課題① 人材育成の仕組みが不十分</h3>
-                    <p class="mb-6 text-gray-600">OJTに依存した教育は、シニア層の負担を増大させるだけでなく、ジュニア層のスキル習熟度にバラつきを生み出しています。結果として、スキルの陳腐化や非効率な手待ち時間が発生しています。</p>
-                    <div class="chart-container h-64 md:h-72">
-                        <canvas id="skillChart"></canvas>
-                    </div>
-                     <p class="text-center text-sm text-gray-500 mt-2">OJT依存によるジュニア層のスキル低下（概念図）</p>
+        <section id="challenges" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2">改革の目的：3つの組織課題の克服</h2>
+            <p class="text-center text-lg text-gray-600 mb-12">持続的な成長を実現するため、我々は3つの顕在化している課題に正面から向き合います。</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-6xl text-[#007BFF] mb-4">①</div>
+                    <h3 class="text-xl font-bold mb-2">人材育成の仕組みが不十分</h3>
+                    <p class="text-gray-600">OJT頼りの教育でスキルが定着せず、シニア層の負担が増大しています。</p>
                 </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-6xl text-[#007BFF] mb-4">②</div>
+                    <h3 class="text-xl font-bold mb-2">業務プロセスの悪循環</h3>
+                    <p class="text-gray-600">フィードバックの遅延が手戻りを生み、常に後手の対応を強いられています。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-6xl text-[#007BFF] mb-4">③</div>
+                    <h3 class="text-xl font-bold mb-2">組織構造の歪み</h3>
+                    <p class="text-gray-600">シニア層が複数の役割を兼任し、本来注力すべき高付加価値業務が停滞しています。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="deep-dive" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12">課題の深掘り：現状の可視化</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="font-bold text-xl mb-4 text-[#2f4b7c]">課題② 業務プロセスの悪循環</h3>
-                    <p class="mb-6 text-gray-600">フィードバックの遅延が、繁忙期での大規模な手戻りを誘発。一つの遅延が他の業務を圧迫し、常に後手に回るという負のスパイラルに陥っています。</p>
-                    <!-- Flowchart Container -->
-                    <div class="relative grid grid-cols-2 gap-x-8 gap-y-12 h-64 md:h-72 items-center justify-items-center p-4">
-                        <!-- Box 1 -->
-                        <div class="flowchart-box col-span-1" style="grid-column: 1 / 2; grid-row: 1 / 2;">
-                            <strong>1. 入力遅延</strong><br>初期段階での遅れ
+                    <h3 class="text-2xl font-bold mb-4 text-center">課題①：OJT頼りの教育と非効率なフロー</h3>
+                    <p class="text-center text-gray-600 mb-6">現行の教育プロセスは個人の頑張りに依存し、組織的なスキルアップを阻害しています。これを客観的な評価基準を持つ体系的なフローへと変革します。</p>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold mb-2 text-center text-red-600">Before: 現行の教育プロセス</h4>
+                            <div class="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-2">
+                                <div class="flow-box border-red-500 bg-red-50">OJT開始</div>
+                                <div class="flow-arrow text-red-500">→</div>
+                                <div class="flow-box border-red-500 bg-red-50">個別指導</div>
+                                <div class="flow-arrow text-red-500">→</div>
+                                <div class="flow-box border-red-500 bg-red-50">習熟度のバラつき</div>
+                            </div>
                         </div>
-                        <!-- Box 2 -->
-                        <div class="flowchart-box col-span-1" style="grid-column: 2 / 3; grid-row: 1 / 2;">
-                            <strong>2. ミス発覚</strong><br>繁忙期に表面化
+                        <div class="text-center text-4xl font-bold text-[#007BFF]">↓</div>
+                        <div>
+                            <h4 class="font-bold mb-2 text-center text-green-600">After: 新しい教育プロセス</h4>
+                            <div class="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-2">
+                                <div class="flow-box border-green-500 bg-green-50">共通研修 & テスト</div>
+                                <div class="flow-arrow text-green-500">→</div>
+                                <div class="flow-box border-green-500 bg-green-50">ロープレ & FB</div>
+                                <div class="flow-arrow text-green-500">→</div>
+                                <div class="flow-box border-green-500 bg-green-50">体系的スキルアップ</div>
+                            </div>
                         </div>
-                        <!-- Box 4 (bottom-left) -->
-                        <div class="flowchart-box col-span-1" style="grid-column: 1 / 2; grid-row: 2 / 3;">
-                            <strong>4. 他業務圧迫</strong><br>スケジュール形骸化
-                        </div>
-                        <!-- Box 3 (bottom-right) -->
-                        <div class="flowchart-box col-span-1" style="grid-column: 2 / 3; grid-row: 2 / 3;">
-                            <strong>3. 大規模な手戻り</strong><br>生産性が大幅低下
-                        </div>
-
-                        <!-- Arrows -->
-                        <!-- Arrow 1 (入力遅延 -> ミス発覚) -->
-                        <div class="flowchart-arrow-line h-px" style="width: calc(100% - 16px); top: 50px; left: 180px;"></div>
-                        <span class="flowchart-arrowhead" style="top: 38px; left: calc(100% - 70px);">▶</span>
-
-                        <!-- Arrow 2 (ミス発覚 -> 大規模な手戻り) -->
-                        <div class="flowchart-arrow-line w-px" style="height: calc(100% - 130px); top: 125px; right: calc(25% - 14px);"></div>
-                        <span class="flowchart-arrowhead" style="top: calc(100% - 120px); right: calc(25% - 22px);">▼</span>
-
-                        <!-- Arrow 3 (大規模な手戻り -> 他業務圧迫) -->
-                        <div class="flowchart-arrow-line h-px" style="width: calc(100% - 16px); bottom: 50px; left: 180px;"></div>
-                        <span class="flowchart-arrowhead" style="bottom: 60px; left: calc(20% - 40px);">◀</span>
-
-                        <!-- Arrow 4 (他業務圧迫 -> 入力遅延) -->
-                        <div class="flowchart-arrow-line w-px" style="height: calc(100% - 130px); top: 5px; left: calc(25% - 14px);"></div>
-                        <span class="flowchart-arrowhead" style="top: 0px; left: calc(25% - 22px);">▲</span>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2">
-                    <h3 class="font-bold text-xl mb-4 text-[#2f4b7c]">課題③ 組織構造の歪みとシニア層への負荷集中</h3>
-                    <p class="mb-6 text-gray-600">シニア層がプレイヤー、管理者、教育者など複数の役割を一人で担い、本来注力すべき高付加価値業務や仕組み作りに時間を割けていません。これが組織全体のボトルネックとなっています。</p>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                        <div class="chart-container h-80">
-                            <canvas id="seniorWorkloadChart"></canvas>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-center">課題②：業務プロセスの悪循環</h3>
+                    <p class="text-center text-gray-600 mb-6">計画性の欠如から始まる負の連鎖が、組織全体の生産性を低下させています。このループを断ち切る必要があります。</p>
+                    <div class="relative p-8 flex items-center justify-center">
+                         <div class="absolute w-64 h-64 border-4 border-dashed border-red-500 rounded-full animate-spin" style="animation-duration: 20s;"></div>
+                         <div class="z-10 text-center space-y-2">
+                            <div class="flow-box p-3 border-red-500">計画性の欠如</div>
+                            <div class="text-2xl text-red-500">↓</div>
+                            <div class="flow-box p-3 border-red-500">後手後手の対応</div>
+                             <div class="text-2xl text-red-500">↓</div>
+                            <div class="flow-box p-3 border-red-500">繁忙期にミス発覚</div>
+                             <div class="text-2xl text-red-500">↓</div>
+                            <div class="flow-box p-3 border-red-500">大規模な手戻り</div>
                         </div>
-                        <div class="flex flex-col items-center justify-center p-4">
-                             <div class="relative border-4 border-dashed border-[#d45087] rounded-full w-32 h-32 flex items-center justify-center text-center font-bold text-[#d45087] bg-red-50">シニア層</div>
-                             <div class="absolute text-center" style="transform: translate(-120px, -60px);">👨‍💼<br>顧客対応</div>
-                             <div class="absolute text-center" style="transform: translate(120px, -60px);">📈<br>実務作業</div>
-                             <div class="absolute text-center" style="transform: translate(-120px, 60px);">👨‍🏫<br>部下育成</div>
-                             <div class="absolute text-center" style="transform: translate(120px, 60px);">📋<br>経営報告</div>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-center">課題③：シニア層への過度な負荷集中</h3>
+                    <p class="text-center text-gray-600 mb-6">シニア層がプレイヤーから管理者、教育者まで複数の役割を担い、疲弊しています。この負荷の可視化が改革の第一歩です。</p>
+                    <div class="chart-container">
+                        <canvas id="seniorLoadChart"></canvas>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="kaizen" class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#665191]">解決策は「専門特化」。分業体制への移行</h2>
-            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">属人的な「一人完結型」から脱却し、業務の専門性に応じた「分業体制」へと移行します。これにより、各員が専門性を高め、組織全体としての品質と効率を最大化します。</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-200 rounded-lg p-8 text-center border-4 border-dashed border-gray-400">
-                    <h4 class="text-2xl font-bold text-gray-600 mb-4">Before: 一人完結型</h4>
-                    <p class="text-gray-500 mb-4">全員が会計入力から顧客対応まで担当</p>
-                    <div class="flex flex-wrap gap-2 justify-center text-sm">
-                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">入力</span>
-                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">チェック</span>
-                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">顧客対応</span>
-                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">申告</span>
-                        <span class="bg-gray-400 text-white px-3 py-1 rounded-full">教育</span>
+        <section id="solution" class="mb-16 bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-center mb-2">改善の方向性：「専門特化」による分業体制へ</h2>
+            <p class="text-center text-lg text-gray-600 mb-12">属人的な「一人完結型」から脱却し、各々が専門性を最大限に発揮できる「分業体制」を構築します。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center p-6 border-4 border-dashed border-red-400 rounded-lg bg-red-50">
+                    <h3 class="text-2xl font-bold mb-4">Before: 現行体制</h3>
+                    <p class="mb-4">全員が全ての業務を兼任し、責任範囲が曖昧。非効率と混乱が生じています。</p>
+                     <div class="relative w-48 h-48 mx-auto">
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-[#00BFFF] rounded-full flex items-center justify-center text-white font-bold">全員</div>
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-2 p-1 bg-white rounded-lg shadow">会計</div>
+                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 mb-2 p-1 bg-white rounded-lg shadow">顧客対応</div>
+                        <div class="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 p-1 bg-white rounded-lg shadow">税務</div>
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 p-1 bg-white rounded-lg shadow">教育</div>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-[#665191] to-[#a05195] rounded-lg p-8 text-center text-white shadow-2xl">
-                     <h4 class="text-2xl font-bold mb-4">After: 専門特化型</h4>
-                     <p class="opacity-90 mb-4">2つの専門部門を新設</p>
-                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                         <div class="flex-1 bg-white/20 p-4 rounded-lg">
-                            <h5 class="font-bold">BK部門</h5>
-                            <p class="text-sm">会計入力・決算のプロ集団</p>
-                         </div>
-                         <div class="flex-1 bg-white/20 p-4 rounded-lg">
-                            <h5 class="font-bold">CS部門</h5>
-                            <p class="text-sm">顧客対応・申告のプロ集団</p>
-                         </div>
+                <div class="text-center p-6 border-4 border-dashed border-green-400 rounded-lg bg-green-50">
+                    <h3 class="text-2xl font-bold mb-4">After: 新体制</h3>
+                    <p class="mb-4">専門性に基づき2部門を新設。役割と責任を明確化し、プロフェッショナル集団を形成します。</p>
+                    <div class="flex justify-around items-start">
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-[#007BFF] rounded-full flex flex-col items-center justify-center text-white font-bold p-2 shadow-lg">
+                                <span class="text-lg">BK部門</span>
+                                <span class="text-xs mt-1">会計入力・決算</span>
+                            </div>
+                            <p class="mt-2 text-sm font-semibold">正確性と効率性</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-[#87CEEB] rounded-full flex flex-col items-center justify-center text-white font-bold p-2 shadow-lg">
+                                <span class="text-lg">CS部門</span>
+                                <span class="text-xs mt-1">顧客対応・申告</span>
+                            </div>
+                             <p class="mt-2 text-sm font-semibold">顧客満足度</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="new-system" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12">新組織体制と新たな業務フロー</h2>
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center mb-6">新組織図</h3>
+                    <div class="p-4 space-y-4 text-center">
+                        <div class="flow-box bg-[#003366] text-white">全体統括: 磯山, 智原</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box bg-[#007BFF] text-white">統括補佐・調整役: 中城, 秋重, 玉山</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flex justify-around space-x-4">
+                            <div class="w-1/2">
+                                <div class="flow-box bg-[#00BFFF] text-white">BK部門長: 古賀</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box">BKジュニア・アシスタント</div>
+                            </div>
+                            <div class="w-1/2">
+                                <div class="flow-box bg-[#87CEEB] text-white">CS部門長: 内木場</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box">CSシニア・ジュニア</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-center mb-6">新しい業務・品質管理フロー</h3>
+                     <div class="space-y-4">
+                        <div class="flow-box">顧客情報・資料受領</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box border-blue-400">
+                            <p class="font-bold">BK部門: 会計入力・決算資料作成</p>
+                            <p class="text-sm text-gray-500 mt-1">品質管理: 古賀による全件チェック体制</p>
+                        </div>
+                        <div class="flow-arrow">↓ 連携・確認</div>
+                        <div class="flow-box border-sky-400">
+                            <p class="font-bold">CS部門: レビュー・申告・顧客対応</p>
+                            <p class="text-sm text-gray-500 mt-1">品質管理: 内木場による全件チェック体制</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box bg-green-100 border-green-500">サービス品質向上 & 顧客満足度向上</div>
                      </div>
                 </div>
             </div>
         </section>
 
-        <section id="shin-taisei" class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#a05195]">新組織体制と新たな業務フロー</h2>
-            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">新しい組織体制では、各部門に責任者を配置し、明確な指揮命令系統を確立。部門間の連携を密にし、淀みのない業務フローを実現します。</p>
-            
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <div class="text-center">
-                    <div class="inline-block bg-[#a05195] text-white px-6 py-2 rounded-lg shadow-md"><strong>全体統括</strong>: 磯山, 智原</div>
-                    <div class="h-8 w-px bg-gray-300 mx-auto"></div>
-                    <div class="inline-block bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md"><strong>統括補佐・調整役</strong>: 玉山 (8月〜)</div>
-                    <div class="h-8 w-px bg-gray-300 mx-auto"></div>
-                    <div class="flex justify-center">
-                      <div class="w-1/2 h-px bg-gray-300"></div>
-                      <div class="w-1/2 h-px bg-gray-300"></div>
-                    </div>
-                    <div class="flex justify-center">
-                      <div class="w-1/2 border-r border-gray-300 h-8"></div>
-                      <div class="w-1/2 h-8"></div>
-                    </div>
-
-                    <div class="flex justify-around gap-4">
-                        <div class="flex-1 text-center">
-                            <div class="inline-block bg-[#003f5c] text-white px-6 py-2 rounded-lg shadow-md"><strong>BK部門長</strong>: 古賀マネージャー</div>
-                            <div class="h-4 w-px bg-gray-300 mx-auto"></div>
-                            <div class="border border-gray-200 p-4 rounded-lg mt-2">
-                                <p>BKジュニア</p>
-                                <p>アシスタント</p>
-                            </div>
-                        </div>
-                        <div class="flex-1 text-center">
-                            <div class="inline-block bg-[#f95d6a] text-white px-6 py-2 rounded-lg shadow-md"><strong>CS部門長</strong>: 内木場マネージャー</div>
-                            <div class="h-4 w-px bg-gray-300 mx-auto"></div>
-                             <div class="border border-gray-200 p-4 rounded-lg mt-2">
-                                <p>CSシニア</p>
-                                <p>CSジュニア</p>
-                            </div>
-                        </div>
-                    </div>
+        <section id="effects" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-2">導入による期待効果</h2>
+            <p class="text-center text-lg text-gray-600 mb-12">この改革は、組織のあらゆる側面にポジティブな影響をもたらします。</p>
+             <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="chart-container h-96 md:h-[500px]">
+                    <canvas id="effectsChart"></canvas>
                 </div>
-
-                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <div class="p-4 bg-gray-50 rounded-lg">
-                        <h4 class="font-bold text-[#003f5c]">BK部門の役割</h4>
-                        <p class="text-sm text-gray-600">週次会議で進捗を管理し、CS部門の納期から逆算したスケジュールを徹底します。</p>
-                    </div>
-                     <div class="p-4 bg-gray-50 rounded-lg">
-                        <h4 class="font-bold text-gray-600">連携</h4>
-                        <p class="text-sm text-gray-600">両部門長が密に連携し、情報のサイロ化を防ぎ、円滑な業務遂行を支援します。</p>
-                    </div>
-                     <div class="p-4 bg-gray-50 rounded-lg">
-                        <h4 class="font-bold text-[#f95d6a]">CS部門の役割</h4>
-                        <p class="text-sm text-gray-600">顧客対応と申告業務の進捗を管理し、BK部門へ正確な情報を提供します。</p>
-                    </div>
-                </div>
+                 <p class="text-center text-gray-600 mt-6">専門特化と仕組み化により、品質、生産性、人材育成、組織力の全てが飛躍的に向上し、持続的成長の基盤が築かれます。</p>
             </div>
         </section>
 
-        <section id="ikusei" class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#d45087]">育成と品質管理の新しい仕組み</h2>
-             <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">属人性を排し、「仕組み」で人と品質を担保します。客観的な評価基準と徹底したチェック体制で、組織全体のレベルを底上げします。</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="font-bold text-xl mb-4 text-[#d45087]">✅ 育成の仕組み化</h3>
-                    <ul class="space-y-4 list-disc list-inside text-gray-600">
-                        <li>
-                            <strong>アシスタント:</strong> 実技テスト（合格基準90点）を導入し、客観的なスキル評価を確立。
-                        </li>
-                         <li>
-                            <strong>CSジュニア:</strong> 研修とロープレを制度化し、独り立ちまでを体系的にサポート。
-                        </li>
-                    </ul>
+        <section id="plan" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12">実行に向けた計画と留意点</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-center">実行スケジュール案</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 font-bold">6月</div>
+                            <div class="flex-1 gantt-bar" style="grid-column: 1 / 2;">役員会議での承認</div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 font-bold">7月</div>
+                            <div class="flex-1 gantt-bar" style="grid-column: 2 / 3;">全スタッフへの説明会</div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 font-bold">8月</div>
+                            <div class="flex-1 gantt-bar" style="grid-column: 3 / 4;">玉山氏join</div>
+                        </div>
+                         <div class="flex items-center space-x-4">
+                            <div class="w-16 font-bold">9月~</div>
+                            <div class="flex-1 gantt-bar bg-[#00BFFF]" style="grid-column: 4 / 6;">新体制での業務試行 (移行期間)</div>
+                        </div>
+                    </div>
                 </div>
-                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="font-bold text-xl mb-4 text-[#d45087]">✅ 品質管理の仕組み化</h3>
-                     <ul class="space-y-4 list-disc list-inside text-gray-600">
-                        <li>
-                            <strong>BK部門:</strong> 部門長による全件チェック体制を構築し、入力段階から精度を追求。
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-center">成功のための留意点</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-2xl text-[#007BFF] mr-3">✔</span>
+                            <div>
+                                <h4 class="font-bold">部門間連携のルール化</h4>
+                                <p class="text-gray-600">情報共有を円滑にするための仕組みを構築し、サイロ化を防ぎます。</p>
+                            </div>
                         </li>
-                         <li>
-                            <strong>CS部門:</strong> 部門長による全件チェックとタスク管理を徹底し、対応漏れを防止。
+                        <li class="flex items-start">
+                            <span class="text-2xl text-[#007BFF] mr-3">✔</span>
+                             <div>
+                                <h4 class="font-bold">公平な評価制度の設計</h4>
+                                <p class="text-gray-600">両部門の貢献が正当に評価される制度を設計し、モチベーションを維持します。</p>
+                            </div>
+                        </li>
+                         <li class="flex items-start">
+                             <span class="text-2xl text-[#007BFF] mr-3">✔</span>
+                             <div>
+                                <h4 class="font-bold">丁寧な移行措置</h4>
+                                <p class="text-gray-600">スタッフの不安を払拭するため、継続的なコミュニケーションとサポートを実施します。</p>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section id="kouka" class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#f95d6a]">改革がもたらす4つの期待効果</h2>
-             <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">この改革は、品質、生産性、人材、そして組織力という4つの側面で大きな向上をもたらし、企業の持続的成長の基盤となります。</p>
-            <div class="bg-white rounded-lg shadow-lg p-6 lg:p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="chart-container h-80 md:h-96">
-                        <canvas id="effectRadarChart"></canvas>
-                    </div>
-                    <div class="space-y-6 flex flex-col justify-center">
-                        <div>
-                            <h4 class="font-bold text-lg text-[#003f5c]">品質向上</h4>
-                            <p class="text-gray-600">専門特化とダブルチェックにより、ミスが削減されサービス品質が均質化します。</p>
-                        </div>
-                         <div>
-                            <h4 class="font-bold text-lg text-[#665191]">生産性向上</h4>
-                            <p class="text-gray-600">業務の悪循環が解消され、標準化によって新たな時間が創出されます。</p>
-                        </div>
-                         <div>
-                            <h4 class="font-bold text-lg text-[#d45087]">人材育成</h4>
-                            <p class="text-gray-600">明確なキャリアパスが、若手の成長意欲を促進し、定着率向上に繋がります。</p>
-                        </div>
-                         <div>
-                            <h4 class="font-bold text-lg text-[#ff7c43]">組織力強化</h4>
-                            <p class="text-gray-600">シニア層の負担が軽減され、高付加価値業務へ集中できる環境が整います。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="keikaku">
-             <h2 class="text-3xl font-bold text-center mb-2 text-[#ff7c43]">実行に向けた計画と成功の鍵</h2>
-             <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">計画は絵に描いた餅ではありません。明確なスケジュールと成功のための留意点を共有し、着実に改革を推進します。</p>
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div>
-                        <h3 class="font-bold text-xl mb-6 text-[#ff7c43]">実行スケジュール</h3>
-                        <div class="relative border-l-2 border-[#ff7c43] pl-8 space-y-10">
-                            <div class="relative timeline-item">
-                                <p class="font-bold">6月下旬: 役員会議での承認</p>
-                                <p class="text-sm text-gray-500">改革の第一歩</p>
-                            </div>
-                            <div class="relative timeline-item">
-                                <p class="font-bold">7月: 全スタッフへの説明会</p>
-                                <p class="text-sm text-gray-500">新体制に向けた準備期間</p>
-                            </div>
-                            <div class="relative timeline-item">
-                                <p class="font-bold">8月: 玉山氏着任と管理職研修</p>
-                                <p class="text-sm text-gray-500">新体制のキーマンが始動</p>
-                            </div>
-                             <div class="relative timeline-item">
-                                <p class="font-bold">9月〜: 新体制での業務試行</p>
-                                <p class="text-sm text-gray-500">移行期間を経て本格稼働へ</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-xl mb-6 text-[#ff7c43]">成功のための留意点</h3>
-                        <div class="space-y-4">
-                            <div class="bg-orange-50 p-4 rounded-lg">
-                                <h4 class="font-semibold">部門間連携のルール化</h4>
-                                <p class="text-sm text-gray-600">情報共有を円滑にする仕組みを構築します。</p>
-                            </div>
-                            <div class="bg-orange-50 p-4 rounded-lg">
-                                <h4 class="font-semibold">公平な評価制度の設計</h4>
-                                <p class="text-sm text-gray-600">両部門の貢献が正当に評価される制度を設計します。</p>
-                            </div>
-                             <div class="bg-orange-50 p-4 rounded-lg">
-                                <h4 class="font-semibold">丁寧な移行措置</h4>
-                                <p class="text-sm text-gray-600">スタッフの不安を払拭するためのコミュニケーションを徹底します。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
     
-    <footer class="text-center p-6 mt-12 text-gray-500 text-sm">
-        <p>&copy; 2025 組織改革プロジェクト. All Rights Reserved.</p>
+    <footer class="bg-[#003366] text-white text-center py-6">
+        <p>持続可能な未来へ、変革の第一歩を。</p>
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const brilliantBlues = ['#003f5c', '#665191', '#d45087', '#ff7c43', '#ffa600', '#2f4b7c', '#a05195', '#f95d6a'];
-
-        function wrapLabel(str, maxWidth) {
-            if (typeof str !== 'string' || str.length <= maxWidth) {
-                return str;
-            }
-            const words = str.split(' ');
-            const lines = [];
-            let currentLine = words[0];
-
-            for (let i = 1; i < words.length; i++) {
-                if (currentLine.length + words[i].length + 1 < maxWidth) {
-                    currentLine += ' ' + words[i];
-                } else {
-                    lines.push(currentLine);
-                    currentLine = words[i];
-                }
-            }
-            lines.push(currentLine);
-            return lines;
-        }
-
-        const tooltipTitleCallback = {
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        title: function(tooltipItems) {
-                            const item = tooltipItems[0];
-                            let label = item.chart.data.labels[item.dataIndex];
-                            if (Array.isArray(label)) {
-                                return label.join(' ');
-                            } else {
-                                return label;
-                            }
-                        }
-                    }
-                }
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
             }
         };
 
-        const skillCtx = document.getElementById('skillChart')?.getContext('2d');
-        if (skillCtx) {
-            new Chart(skillCtx, {
-                type: 'line',
+        const seniorLoadCtx = document.getElementById('seniorLoadChart');
+        if (seniorLoadCtx) {
+            new Chart(seniorLoadCtx, {
+                type: 'bar',
                 data: {
-                    labels: ['入社時', '3ヶ月後', '6ヶ月後', '1年後'],
+                    labels: ['プレイヤー', '管理者', '教育者', '最終防衛ライン'],
                     datasets: [{
-                        label: 'ジュニア層のスキルレベル',
-                        data: [85, 70, 60, 50],
-                        borderColor: brilliantBlues[2],
-                        backgroundColor: 'rgba(212, 80, 135, 0.1)',
-                        fill: true,
-                        tension: 0.3
+                        label: 'シニア層の役割兼任による負荷',
+                        data: [90, 75, 85, 95],
+                        backgroundColor: [
+                            'rgba(0, 123, 255, 0.7)',
+                            'rgba(0, 191, 255, 0.7)',
+                            'rgba(135, 206, 235, 0.7)',
+                            'rgba(173, 216, 230, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(0, 191, 255, 1)',
+                            'rgba(135, 206, 235, 1)',
+                            'rgba(173, 216, 230, 1)'
+                        ],
+                        borderWidth: 1
                     }]
                 },
                 options: {
+                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
-                    ...tooltipTitleCallback,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
                     scales: {
-                        y: {
+                        x: {
                             beginAtZero: true,
                             max: 100,
-                            title: { display: true, text: 'スキルレベル' }
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%'
+                                }
+                            }
                         }
                     }
                 }
             });
         }
         
-        const seniorWorkloadCtx = document.getElementById('seniorWorkloadChart')?.getContext('2d');
-        if (seniorWorkloadCtx) {
-            new Chart(seniorWorkloadCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['現状', '改革後 (理想)'],
-                    datasets: [
-                        { label: 'プレイヤー業務', data: [50, 10], backgroundColor: brilliantBlues[0] },
-                        { label: '管理者業務', data: [20, 40], backgroundColor: brilliantBlues[1] },
-                        { label: '教育者業務', data: [20, 20], backgroundColor: brilliantBlues[2] },
-                        { label: '仕組みづくり', data: [10, 30], backgroundColor: brilliantBlues[3] }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    ...tooltipTitleCallback,
-                    scales: {
-                        x: { stacked: true },
-                        y: { stacked: true, title: { display: true, text: '業務時間割合 (%)' } }
-                    },
-                    plugins: {
-                        legend: { position: 'bottom' },
-                        ...tooltipTitleCallback.plugins
-                    }
-                }
-            });
-        }
-
-        const effectRadarCtx = document.getElementById('effectRadarChart')?.getContext('2d');
-        if (effectRadarCtx) {
-            new Chart(effectRadarCtx, {
+        const effectsCtx = document.getElementById('effectsChart');
+        if(effectsCtx) {
+            new Chart(effectsCtx, {
                 type: 'radar',
                 data: {
-                    labels: ['品質向上', '生産性向上', '人材育成', '組織力強化', 'シニア層の負荷'],
-                    datasets: [
-                        {
-                            label: '改革前',
-                            data: [4, 5, 3, 4, 9],
-                            borderColor: brilliantBlues[2],
-                            backgroundColor: 'rgba(212, 80, 135, 0.2)',
-                            pointBackgroundColor: brilliantBlues[2]
-                        },
-                        {
-                            label: '改革後 (期待値)',
-                            data: [8, 9, 8, 9, 4],
-                            borderColor: brilliantBlues[1],
-                            backgroundColor: 'rgba(102, 81, 145, 0.2)',
-                             pointBackgroundColor: brilliantBlues[1]
-                        }
-                    ]
+                    labels: ['品質向上', '生産性向上', '人材育成', '組織力強化'],
+                    datasets: [{
+                        label: '現状 (Before)',
+                        data: [30, 40, 25, 35],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(255, 99, 132)'
+                    }, {
+                        label: '改革後 (After)',
+                        data: [90, 85, 95, 90],
+                        fill: true,
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        borderColor: 'rgb(0, 123, 255)',
+                        pointBackgroundColor: 'rgb(0, 123, 255)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(0, 123, 255)'
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                     ...tooltipTitleCallback,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
                     scales: {
                         r: {
                             beginAtZero: true,
-                            max: 10,
-                            ticks: { backdropColor: 'transparent' }
+                            max: 100,
+                            pointLabels: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                stepSize: 20
+                            }
                         }
+                    },
+                    elements: {
+                      line: {
+                        borderWidth: 3
+                      }
                     }
                 }
             });
         }
-    });
     </script>
 </body>
 </html>
